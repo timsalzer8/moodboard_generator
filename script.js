@@ -36,6 +36,44 @@ const colorPalettes = [
     ["#A0E7E5", "#B4F8C8", "#FBE7C6", "#FFAEBC", "#CDB4DB"]
   ];
 
+const colorNameMap = {
+    "#2B2E4A": "Dark Indigo",
+    "#E84545": "Crimson Red",
+    "#903749": "Plum Punch",
+    "#53354A": "Eggplant",
+    "#FFD700": "Gold",
+
+    "#FCE38A": "Vanilla Cream",
+    "#F38181": "Blush",
+    "#EAFFD0": "Mint Ice",
+    "#95E1D3": "Seafoam",
+    "#FFB6B9": "Cotton Candy",
+
+    "#3A506B": "Deep Ocean",
+    "#5BC0BE": "Teal Mist",
+    "#6FFFE9": "Electric Aqua",
+    "#1C2541": "Midnight Navy",
+    "#FFD6FF": "Lilac Snow",
+
+    "#D8E2DC": "Soft Pink",
+    "#FFE5D9": "Peach Cream",
+    "#FFCAD4": "Rose Quartz",
+    "#F4ACB7": "Pastel Coral",
+    "#A9DEF9": "Baby Blue",
+
+    "#FFADAD": "Soft Rose",
+    "#FFD6A5": "Apricot",
+    "#FDFFB6": "Lemon Meringue",
+    "#CAFFBF": "Pistachio",
+    "#9BF6FF": "Sky Ice",
+
+    "#A0E7E5": "Tropical Aqua",
+    "#B4F8C8": "Mint Sorbet",
+    "#FBE7C6": "Vanilla Peach",
+    "#FFAEBC": "Strawberry Milk",
+    "#CDB4DB": "Lavender Fog"
+};
+
 button.addEventListener("click", function () {
     const randomIndex = Math.floor(Math.random() * moods.length);
     const selectedMood = moods[randomIndex];
@@ -65,7 +103,11 @@ const paletteContainer = document.getElementById("colorPalette");
     paletteContainer.innerHTML = "";
 
     paletteColors.forEach(color => {
+        const colorWrapper = document.createElement("div");
         const colorBox = document.createElement("div");
+        colorWrapper.style.display = "inline-block";
+        colorWrapper.style.margin = "5px";
+        colorWrapper.style.textAlign = "center";
         colorBox.classList.add("colorBox");
         colorBox.style.backgroundColor = color;
         colorBox.style.width = "50px";
@@ -75,6 +117,14 @@ const paletteContainer = document.getElementById("colorPalette");
         colorBox.style.borderRadius = "6px";
         colorBox.title = color;
         colorBox.style.boxShadow = "0 0 0 1px rgba(0,0,0,0.4)";
+
+        const colorName = colorNameMap[color.toUpperCase()] || "Unknown Color";
+
+        const nameTag = document.createElement("p");
+        nameTag.textContent = colorName;
+        nameTag.style.fontSize = "0.6rem";
+        nameTag.style.margin = "0";
+        nameTag.style.textAlign = "center";
 
         const colorLabel = document.createElement("p");
         colorLabel.textContent = color;
@@ -101,14 +151,11 @@ const paletteContainer = document.getElementById("colorPalette");
             copyToClipboard(color, colorLabel);
         });
 
-        const colorWrapper = document.createElement("div");
-        colorWrapper.style.display = "inline-block";
-        colorWrapper.style.margin = "5px";
-        colorWrapper.style.textAlign = "center";
-
         colorWrapper.appendChild(colorBox);
+        colorWrapper.appendChild(nameTag); 
         colorWrapper.appendChild(colorLabel);
         paletteContainer.appendChild(colorWrapper);
+        
     });
 
     document.body.style.backgroundColor = bgColor;
