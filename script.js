@@ -66,6 +66,7 @@ const paletteContainer = document.getElementById("colorPalette");
 
     paletteColors.forEach(color => {
         const colorBox = document.createElement("div");
+        colorBox.classList.add("colorBox");
         colorBox.style.backgroundColor = color;
         colorBox.style.width = "50px";
         colorBox.style.height = "50px";
@@ -80,6 +81,25 @@ const paletteContainer = document.getElementById("colorPalette");
         colorLabel.style.fontSize = "0.75rem";
         colorLabel.style.margin = "2px 0 10px";
         colorLabel.style.textAlign = "center";
+        colorLabel.style.cursor = "pointer";
+
+        function copyToClipboard(color, label) {
+            navigator.clipboard.writeText(color).then(() => {
+                const originalText = label.textContent;
+                label.textContent = "Copied!";
+                setTimeout(() => {
+                    label.textContent = originalText;
+                }, 1000);
+            });
+        }
+        
+        colorLabel.addEventListener("click", () => {
+            copyToClipboard(color, colorLabel);
+        });
+        
+        colorBox.addEventListener("click", () => {
+            copyToClipboard(color, colorLabel);
+        });
 
         const colorWrapper = document.createElement("div");
         colorWrapper.style.display = "inline-block";

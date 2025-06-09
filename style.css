@@ -8,3 +8,24 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+#colorPalette {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  justify-items: center;
+}
+
+#colorPalette p {
+  cursor: pointer;
+}
+
+.colorBox {
+  transition: transform 0.3s ease;
+}
+.colorBox:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
