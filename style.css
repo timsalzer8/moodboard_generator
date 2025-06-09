@@ -29,3 +29,70 @@
   transform: scale(1.1);
   cursor: pointer;
 }
+
+#darkModeToggleContainer {
+  transition: opacity 0.4s ease;
+}
+
+body {
+  background-color: #ffffff;
+  color: #000;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+.toggle-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.toggle-container input[type="checkbox"] {
+  width: 40px;
+  height: 20px;
+  appearance: none;
+  background: #ccc;
+  border-radius: 20px;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-container input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 2px;
+  left: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-container input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
+.toggle-container input[type="checkbox"]:checked {
+  background: #4f4f4f;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.toggle-container .material-symbols-outlined {
+  position: relative;
+  top: -1px;
+}

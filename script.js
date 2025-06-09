@@ -1,5 +1,8 @@
 const button = document.getElementById("generateBtn");
 const moodText = document.getElementById("moodText");
+const modeToggle = document.getElementById("modeToggle");
+const darkToggleContainer = document.getElementById("darkModeToggleContainer");
+
 
 const moods = [
     "Zen Garden",
@@ -75,6 +78,11 @@ const colorNameMap = {
 };
 
 button.addEventListener("click", function () {
+    darkToggleContainer.style.opacity = "0";
+setTimeout(() => {
+    darkToggleContainer.style.display = "none";
+}, 500);
+
     const randomIndex = Math.floor(Math.random() * moods.length);
     const selectedMood = moods[randomIndex];
 
@@ -159,4 +167,30 @@ const paletteContainer = document.getElementById("colorPalette");
     });
 
     document.body.style.backgroundColor = bgColor;
+    document.body.style.color = getContrastColor(bgColor);
+    button.style.color = getContrastColor(bgColor);
+    button.style.borderColor = getContrastColor(bgColor);
+    const contrastColor = getContrastColor(bgColor);
+    button.style.color = contrastColor;
+    button.style.border = `1px solid ${contrastColor}`;
+    button.style.backgroundColor = contrastColor === "#FFFFFF" ? "#222" : "#f0f0f0";
+    moodText.style.color = getContrastColor(bgColor);
 });
+
+if (localStorage.getItem("mode") === "dark") {
+    document.body.classList.add("dark");
+    modeToggle.checked = true;
+}
+modeToggle.addEventListener("change", () => {
+    const isDark = modeToggle.checked;
+    document.body.classList.toggle("dark", isDark);
+    localStorage.setItem("mode", isDark ? "dark" : "light");
+});
+
+function getContrastColor(bgColor) {
+    const r = parseInt(bgColor.substr(1, 2), 16);
+    const g = parseInt(bgColor.substr(3, 2), 16);
+    const b = parseInt(bgColor.substr(5, 2), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 128 ? "#000000" : "#FFFFFF";
+}

@@ -3,12 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Moodboard Generator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>Moodboard Generator</h1>
-    <button id="generateBtn">Generate Mood</button>
+    <div class="toggle-container" id="darkModeToggleContainer">
+        <input type="checkbox" id="modeToggle" />
+        <label for="modeToggle">
+          <span class="icon light material-symbols-outlined">contrast</span>
+        </label>
+      </div>
+    <button id="generateBtn">Generate Mood</button><br><br>
 <div id="moodText" class="fade-in show">Your mood will appear here...</div>
 <div id="colorPalette"></div>
 <script defer src="script.js"></script>
